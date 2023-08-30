@@ -1,7 +1,7 @@
 package Charles.Implementation;
 
 import Charles.Domain.Cashier;
-import Charles.Domain.Products;
+import Charles.Domain.ProductProperties;
 import Charles.Services.CashierServices;
 
 import java.util.Map;
@@ -18,12 +18,12 @@ public class CashierImpl implements CashierServices {
     }
 
     @Override
-    public boolean addProducts(String productName, int price) {
-        if(!new Products().getProductList().containsKey(productName)){
-            new Products().getProductList().put(productName, price);
+    public boolean addProducts() {
+        if(new Products().addProductsToStore()) {
+            System.out.println("Products added successfully");
             return true;
         } else
-            System.out.println(productName + " already in stock.");
+            System.out.println("Error adding products");
         return false;
     }
 
@@ -32,9 +32,9 @@ public class CashierImpl implements CashierServices {
         int sum = 0;
         System.out.println("---------------------------------------");
         System.out.println("Items" + "                " + "Price");
-        for(Map.Entry<String, Integer> items : new Customer().getCart().entrySet()) {
+        for(Map.Entry<String, ProductProperties> items : customer.getCart().entrySet()) {
             System.out.println(items.getKey() + "          " + items.getValue());
-            sum += items.getValue();
+            sum += items.getValue().getPrice();
         }
         System.out.println("Bill: " + sum);
         System.out.println("Thank you for patronage. Come back next time.");

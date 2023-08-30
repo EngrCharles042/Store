@@ -2,6 +2,7 @@ package Charles;
 
 import Charles.Domain.Cashier;
 import Charles.Domain.Manager;
+import Charles.Implementation.Products;
 import Charles.Implementation.CashierImpl;
 import Charles.Implementation.Customer;
 import Charles.Implementation.ManagerImpl;
@@ -17,27 +18,33 @@ public class Store {
 
         CashierImpl cashierImpl = new CashierImpl(cashier);
         Customer customer = new Customer();
-        Customer customer1 = new Customer();
+
+        new Products().addProductsToStore();
+        new Products().viewItems(new Products().getFoods());
+        System.out.println();
+        new Products().viewItems(new Products().getDrinks());
+//        Customer customer = new Customer(new Products());
+//        Customer customer1 = new Customer(new Products());
 
         //Adding to stock
-        cashierImpl.addProducts("Pepper soup",1500);
-        cashierImpl.addProducts("Coke",250);
-        cashierImpl.addProducts("Rice",1000);
+//        cashierImpl.addProducts("Pepper soup",1500);
+//        cashierImpl.addProducts("Coke",250);
+//        cashierImpl.addProducts("Rice",1000);
 
         //Customer making request
-        customer.enquire("Coke");
-        customer.enquire("Pepper soup");
-        customer.enquire("Rice");
-        customer1.enquire("Coke");
-        customer1.enquire("Pepper soup");
+//        customer.enquire("Coke");
+//        customer.enquire("Pepper soup");
+//        customer.enquire("Rice");
+//        customer1.enquire("Coke");
+//        customer1.enquire("Pepper soup");
 
 
         //Make buy request
-        customer.purchase();
-        customer1.purchase();
+//        customer.purchase();
+//        customer1.purchase();
 
         //Cashier should give receipt
-        cashierImpl.issueReceipt(customer);
-        cashierImpl.issueReceipt(customer1);
+//        cashierImpl.issueReceipt(customer);
+//        cashierImpl.issueReceipt(customer1);
     }
 }
