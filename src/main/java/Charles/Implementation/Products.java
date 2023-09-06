@@ -61,9 +61,8 @@ public class Products implements ProductManagement {
                         //Adding created product to food Map
                         food.put(row[0], newProduct);
                     }
-                    return true;
                 }
-            }
+            } return true;
 
         } catch (FileNotFoundException e) {
             //e.printStackTrace();

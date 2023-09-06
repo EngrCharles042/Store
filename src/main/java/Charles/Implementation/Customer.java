@@ -1,13 +1,20 @@
 package Charles.Implementation;
 
+import Charles.Domain.CustomerModel;
 import Charles.Domain.ProductProperties;
 import Charles.Services.CATEGORY;
 
+import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Customer {
+
+    private CustomerModel customer;
     private Map<String, ProductProperties> cart = new HashMap<>();
+    public Customer(CustomerModel customer) {
+        this.customer = customer;
+    }
 
     public Customer() {
 
@@ -59,14 +66,24 @@ public class Customer {
     public void purchase() {
         //System.out.println(cart);
 
-        System.out.println("-------------------------------");
-        System.out.println("Item" + "              " + "Price");
-        for(Map.Entry<String, ProductProperties> items: cart.entrySet()){
-            System.out.println(items.getKey() + "      |      " + items.getValue());
-        }
-        System.out.println("Proceed to the teller and make payment.");
-        System.out.println();
+//        System.out.println("-------------------------------");
+//        System.out.println("Item" + "              " + "Price");
+//        for(Map.Entry<String, ProductProperties> items: cart.entrySet()){
+//            System.out.println(items.getKey() + "      |      " + items.getValue());
+//        }
+//        System.out.println("Proceed to the teller and make payment.");
+//        System.out.println();
+
+        //CustomerModel customer1 = new CustomerModel(customer.getFullName(), cart);
+        customer.setCart(cart);
+
+        //FIFO Queue
+        new CashierImpl().getCustomersPriorityQueue().add(customer);
+
+        //Priority Queue
+        new CashierImpl().getCustomersFIFOQueue().add(customer);
     }
+
     public Map<String, ProductProperties> getCart() {
         return cart;
     }
